@@ -3,7 +3,7 @@ package us.ascendtech.wordcloud2.shared;
 import java.io.Serializable;
 
 /**
- * Created by pmeyer on 12/30/15.
+ * POJO that holds the word and its frequency
  */
 public class WordCloudChartData implements Serializable {
 

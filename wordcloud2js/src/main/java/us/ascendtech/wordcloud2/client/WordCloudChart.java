@@ -18,6 +18,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ *
+ * This is a GWT Wrapper for wordcloud2.js (http://timdream.org/wordcloud2.js/)
+ * Released under the MIT license
+ * @author Payam Meyer (https://github.com/payammeyer)
+ *
+ */
 public abstract class WordCloudChart extends SimplePanel {
 
 	private static WordCloudClientBundle bundle = GWT.create(WordCloudClientBundle.class);
@@ -73,6 +80,11 @@ public abstract class WordCloudChart extends SimplePanel {
 		});
 	}
 
+	/**
+	 * Sets the chart data and options.
+	 * @param data list of {@code WordCloudChartData}
+	 * @param options wordcloud2.js options
+	 */
 	public void setChartDataAndOptions(List<WordCloudChartData> data, WordCloud2ChartOptions options) {
 		if (data == null || options == null) {
 			return;
@@ -92,6 +104,9 @@ public abstract class WordCloudChart extends SimplePanel {
 		this.options.setList(jsonData);
 	}
 
+	/**
+	 * Draws the word cloud on canvas. This should be called after the container has been added to the DOM
+	 */
 	public void draw() {
 		this.clear();
 
@@ -107,7 +122,6 @@ public abstract class WordCloudChart extends SimplePanel {
 	}
 
 	private native void jsDraw2(Element wordCloudGraph, JavaScriptObject options) /*-{
-        console.log(options);
         wordCloud = new $wnd.WordCloud(wordCloudGraph, options);
     }-*/;
 

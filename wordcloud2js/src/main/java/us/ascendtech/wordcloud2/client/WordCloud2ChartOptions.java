@@ -4,6 +4,9 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsArrayInteger;
 
+/**
+ * These are some of the options provided by wordcloud2.js. They can be extended as needed.
+ */
 public class WordCloud2ChartOptions extends JavaScriptObject {
 
 	public static WordCloud2ChartOptions create() {
