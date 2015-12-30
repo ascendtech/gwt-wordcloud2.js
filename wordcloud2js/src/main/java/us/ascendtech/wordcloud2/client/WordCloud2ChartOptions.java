@@ -58,4 +58,9 @@ public class WordCloud2ChartOptions extends JavaScriptObject {
         return this;
     }-*/;
 
+	public final native WordCloud2ChartOptions setFontFamily(String fontFamily)  /*-{
+        this.fontFamily = fontFamily;
+        return this;
+    }-*/;
+
 }

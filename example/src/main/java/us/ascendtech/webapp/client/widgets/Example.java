@@ -44,10 +44,11 @@ public class Example implements EntryPoint {
 			public void onSuccess(List<WordCloudChartData> result) {
 
 				WordCloud2ChartOptions options = WordCloud2ChartOptions.create();
-				options.setWeightFactor((Math.pow(0.15, 2.3) * Window.getClientWidth() - 600 / 1024));
-				options.setGridSize(12);
+				options.setWeightFactor((Math.pow(2.3, 2.3) * (Window.getClientWidth() - 200) / 1024));
+				options.setGridSize(Math.round(16 * (Window.getClientWidth() - 200) / 1024));
 				options.setRotateRatio(0.5);
 				options.setBackgroundColor("#ffe0e0");
+				options.setFontFamily("Times, serif");
 				options.setColorFunction(createColorFunction());
 
 				wordCloudChart.setChartDataAndOptions(result, options);
@@ -62,7 +63,7 @@ public class Example implements EntryPoint {
 
 	public final native JavaScriptObject createColorFunction() /*-{
         return function (word, weight) {
-            return (weight === 12) ? '#f02222' : '#c09292';
+            return (weight === 40) ? '#f02222' : '#c09292';
         }
     }-*/;
 

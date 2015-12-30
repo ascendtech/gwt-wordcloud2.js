@@ -23,7 +23,6 @@ public abstract class WordCloudChart extends SimplePanel {
 	private static WordCloudClientBundle bundle = GWT.create(WordCloudClientBundle.class);
 	private static final Map<String, WordCloudChart> instanceMap = new HashMap<>();
 
-	private List<WordCloudChartData> wordCloudChartData;
 	private WordCloud2ChartOptions options;
 	private String instanceId;
 
