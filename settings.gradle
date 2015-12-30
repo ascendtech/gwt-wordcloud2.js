@@ -3,7 +3,6 @@ excludes.add(".gradle");
 excludes.add(".git");
 excludes.add("gradle");
 excludes.add("notInMaven");
-excludes.add("DuplicateNameAlgorithm");
 excludes.add("formatter");
 excludes.add(".idea");
 excludes.add("build");

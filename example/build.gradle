@@ -1,3 +1,11 @@
+apply from: '../gwtBuild.gradle'
+
+compileGwt.modules = ['us.ascendtech.webapp.Example']
+superDevMode.modules = ['us.ascendtech.webapp.Example']
+
+devMode.modules = ['us.ascendtech.webapp.Example']
+devMode.startupUrl = 'Example.html'
+
 dependencies {
 
 	compile('com.google.gwt:gwt-user:2.8.0-beta1') {
