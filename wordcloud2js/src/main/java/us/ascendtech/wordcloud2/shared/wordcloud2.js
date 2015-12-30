@@ -211,7 +211,7 @@ if (!window.clearImmediate) {
 
             hover: null,
             click: function (item) {
-                clickedWord(instanceId, item[0], item[1], item[2], item[3]);
+                clickedWord(instanceId, item[0], item[1]);
             }
         };
 

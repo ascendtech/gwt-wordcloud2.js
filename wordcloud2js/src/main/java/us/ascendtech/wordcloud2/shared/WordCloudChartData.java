@@ -7,7 +7,6 @@ import java.io.Serializable;
  */
 public class WordCloudChartData implements Serializable {
 
-	private String abbreviatedWord;
 	private String word;
 	private int frequency;
 
@@ -15,18 +14,9 @@ public class WordCloudChartData implements Serializable {
 	public WordCloudChartData() {
 	}
 
-	public WordCloudChartData(String abbreviatedWord, String word, int frequency) {
-		this.abbreviatedWord = abbreviatedWord;
+	public WordCloudChartData(String word, int frequency) {
 		this.word = word;
 		this.frequency = frequency;
-	}
-
-	public String getAbbreviatedWord() {
-		return abbreviatedWord;
-	}
-
-	public void setAbbreviatedWord(String abbreviatedWord) {
-		this.abbreviatedWord = abbreviatedWord;
 	}
 
 	public String getWord() {
@@ -45,4 +35,11 @@ public class WordCloudChartData implements Serializable {
 		this.frequency = frequency;
 	}
 
+	@Override
+	public String toString() {
+		return "WordCloudChartData{" +
+				"word='" + word + '\'' +
+				", frequency=" + frequency +
+				'}';
+	}
 }

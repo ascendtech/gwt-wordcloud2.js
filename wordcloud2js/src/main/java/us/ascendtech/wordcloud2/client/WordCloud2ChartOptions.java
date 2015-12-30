@@ -43,4 +43,19 @@ public class WordCloud2ChartOptions extends JavaScriptObject {
         return this;
     }-*/;
 
+	public final native WordCloud2ChartOptions setRotateRatio(double rotateRatio)  /*-{
+        this.rotateRatio = rotateRatio;
+        return this;
+    }-*/;
+
+	public final native WordCloud2ChartOptions setBackgroundColor(String backgroundColor)  /*-{
+        this.backgroundColor = backgroundColor;
+        return this;
+    }-*/;
+
+	public final native WordCloud2ChartOptions setColorFunction(JavaScriptObject colorFunction)  /*-{
+        this.color = colorFunction;
+        return this;
+    }-*/;
+
 }

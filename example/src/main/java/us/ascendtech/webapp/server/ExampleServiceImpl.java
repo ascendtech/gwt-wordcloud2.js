@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleService {
 
@@ -32,9 +33,7 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
 			e.printStackTrace();
 		}
 
-		for (String key : wordToFrequencyMap.keySet()) {
-			data.add(new WordCloudChartData("", key, wordToFrequencyMap.get(key)));
-		}
+		data.addAll(wordToFrequencyMap.keySet().stream().map(key -> new WordCloudChartData(key, wordToFrequencyMap.get(key))).collect(Collectors.toList()));
 
 		return data;
 	}

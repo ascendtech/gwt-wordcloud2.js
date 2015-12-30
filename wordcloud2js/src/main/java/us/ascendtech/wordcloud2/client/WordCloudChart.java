@@ -24,6 +24,7 @@ public abstract class WordCloudChart extends SimplePanel {
 	private static final Map<String, WordCloudChart> instanceMap = new HashMap<>();
 
 	private List<WordCloudChartData> wordCloudChartData;
+	private WordCloud2ChartOptions options;
 	private String instanceId;
 
 	static {
@@ -50,21 +51,19 @@ public abstract class WordCloudChart extends SimplePanel {
         return uuid.join('');
     }-*/;
 
-	private static void clickedWord(String instanceId, String abbreviatedTag, int frequency, String tag) {
-		instanceMap.get(instanceId).clickedWord(tag, abbreviatedTag, frequency);
+	private static void clickedWord(String instanceId, String tag, int frequency) {
+		instanceMap.get(instanceId).clickedWord(tag, frequency);
 	}
 
 	public static native void exportStaticMethod() /*-{
         $wnd.clickedWord =
-            @us.ascendtech.wordcloud2.client.WordCloudChart::clickedWord(Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;);
-
+            @us.ascendtech.wordcloud2.client.WordCloudChart::clickedWord(Ljava/lang/String;Ljava/lang/String;I);
     }-*/;
 
-	public abstract void clickedWord(String tag, String abbreviatedTag, int frequency);
+	public abstract void clickedWord(String tag, int frequency);
 
 	public WordCloudChart() {
 		this.instanceId = generateId();
-		//addStyleName(UserController.userCss().wordCloudPadding());
 		instanceMap.put(this.instanceId, this);
 
 		Window.addResizeHandler(new ResizeHandler() {
@@ -75,27 +74,27 @@ public abstract class WordCloudChart extends SimplePanel {
 		});
 	}
 
-	public void setChartData(List<WordCloudChartData> data) {
-		this.wordCloudChartData = data;
+	public void setChartDataAndOptions(List<WordCloudChartData> data, WordCloud2ChartOptions options) {
+		if (data == null || options == null) {
+			return;
+		}
+
+		this.options = options;
+
+		JsArray<JavaScriptObject> jsonData = JsArray.createArray().cast();
+		for (WordCloudChartData w : data) {
+			JsArrayMixed word = JsArrayMixed.createArray().cast();
+			word.push(w.getWord());
+			word.push(w.getFrequency());
+			jsonData.push(word);
+		}
+
+		this.options.setInstanceId(instanceId);
+		this.options.setList(jsonData);
 	}
 
 	public void draw() {
 		this.clear();
-
-		JsArray<JavaScriptObject> data = JsArray.createArray().cast();
-		for (WordCloudChartData w : wordCloudChartData) {
-			JsArrayMixed word = JsArrayMixed.createArray().cast();
-			word.push(w.getAbbreviatedWord());
-			word.push(w.getFrequency());
-			word.push(w.getWord());
-			data.push(word);
-		}
-
-		WordCloud2ChartOptions options = WordCloud2ChartOptions.create();
-		options.setList(data);
-		options.setWeightFactor(1.5);
-		options.setGridSize(12);
-		options.setInstanceId(instanceId);
 
 		Canvas canvas = Canvas.createIfSupported();
 		canvas.getElement().setId("canvas");
@@ -109,6 +108,7 @@ public abstract class WordCloudChart extends SimplePanel {
 	}
 
 	private native void jsDraw2(Element wordCloudGraph, JavaScriptObject options) /*-{
+        console.log(options);
         wordCloud = new $wnd.WordCloud(wordCloudGraph, options);
     }-*/;
 
