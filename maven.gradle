@@ -1,0 +1,71 @@
+if (hasProperty('sonatypeUsername')) {
+	apply plugin: 'maven'
+	apply plugin: 'maven-publish'
+	apply plugin: 'signing'
+
+	task javadocJar(type: Jar, dependsOn: javadoc) {
+		classifier = 'javadoc'
+		from 'build/docs/javadoc'
+	}
+
+	artifacts {
+		archives jar
+		archives sourcesJar
+		archives javadocJar
+	}
+
+
+	signing {
+		required { gradle.taskGraph.hasTask("uploadArchives"); }
+		sign configurations.archives
+	}
+
+	uploadArchives {
+		repositories {
+			mavenDeployer {
+				beforeDeployment {
+					MavenDeployment deployment -> signing.signPom(deployment)
+				}
+
+				if (project.ext.isReleaseVersion) {
+					repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+						authentication(userName: sonatypeUsername, password: sonatypePassword)
+					}
+				} else {
+					repository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+						authentication(userName: sonatypeUsername, password: sonatypePassword)
+					}
+				}
+
+				pom.project {
+					url 'https://github.com/payammeyer/gwt-wordcloud2.js'
+
+					licenses {
+						license {
+							name 'MIT License'
+						}
+					}
+
+					developers {
+						developer {
+							id 'pmeyer'
+							name 'Payam Meyer'
+						}
+					}
+
+					scm {
+						url 'https://github.com/payammeyer/gwt-wordcloud2.js.git'
+						connection 'https://github.com/payammeyer/gwt-wordcloud2.js.git'
+						developerConnection 'https://github.com/payammeyer/gwt-wordcloud2.js.git'
+					}
+
+					name "$project.name"
+					description '$project.description'
+
+				}
+			}
+		}
+	}
+} else {
+	println("No username given.  To specify run gradle with -PsonatypeUsername=username -PsonatypePassword=password")
+}
