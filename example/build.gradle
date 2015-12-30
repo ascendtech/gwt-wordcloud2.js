@@ -1,0 +1,15 @@
+dependencies {
+
+	compile('com.google.gwt:gwt-user:2.8.0-beta1') {
+		transitive false
+	}
+
+	compile 'com.google.guava:guava-gwt:20.0-SNAPSHOT'
+	compile 'org.gwtbootstrap3:gwtbootstrap3:0.9.1'
+	compile 'org.gwtbootstrap3:gwtbootstrap3-extras:0.9.1'
+
+	compile project(':wordcloud2js')
+
+}
+
+

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='example'>
+
+    <inherits name='com.google.gwt.user.User'/>
+    <inherits name='com.google.gwt.place.Place'/>
+    <inherits name="com.google.gwt.i18n.I18N"/>
+
+    <!-- <inherits name='com.google.gwt.user.theme.clean.Clean' />-->
+    <!-- <inherits name='com.google.gwt.user.theme.standard.Standard'/> -->
+    <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
+    <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/> -->
+
+    <!-- Bootstrap Dependencies -->
+    <inherits name="org.gwtbootstrap3.GwtBootstrap3"/>
+    <inherits name="com.google.common.base.Base"/>
+    <inherits name="com.google.common.collect.Collect"/>
+
+    <!-- WordCloud dependency -->
+    <inherits name="us.ascendtech.wordcloud2.WordCloud"/>
+
+    <set-configuration-property name='xsiframe.failIfScriptTag' value='FALSE'/>
+
+    <entry-point class='us.ascendtech.webapp.client.widgets.Example'/>
+
+    <source path='client'/>
+    <source path='shared'/>
+
+</module>

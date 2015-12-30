@@ -1,0 +1,9 @@
+dependencies {
+
+	compile('com.google.gwt:gwt-user:2.8.0-beta1') {
+		transitive false
+	}
+
+}
+
+
