@@ -5,7 +5,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
-import org.gwtbootstrap3.client.ui.html.Div;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import us.ascendtech.webapp.client.services.ExampleServiceProvider;
 import us.ascendtech.wordcloud2.client.WordCloud2ChartOptions;
 import us.ascendtech.wordcloud2.client.WordCloudChart;
@@ -21,10 +21,10 @@ public class Example implements EntryPoint {
 	@Override
 	public void onModuleLoad() {
 
-		final Div main = new Div();
-		main.setMarginLeft(20);
+		final VerticalPanel main = new VerticalPanel();
+		main.setSpacing(15);
 
-		WordCloudChart wordCloudChart = new WordCloudChart() {
+		final WordCloudChart wordCloudChart = new WordCloudChart() {
 			@Override
 			public void clickedWord(String tag, int frequency) {
 				// TODO: Implement clicking on words
