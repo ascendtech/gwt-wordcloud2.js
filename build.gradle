@@ -53,13 +53,9 @@ subprojects {
 	ext.guavaVersion = '20.0-SNAPSHOT'
 	ext.gsonVersion = '2.2.4'
 
-
-
 	dependencies {
 		testCompile 'junit:junit:[4.10,)'
 	}
-
-
 
 	sourceSets {
 		main {
