@@ -38,7 +38,11 @@ public abstract class WordCloudChart extends SimplePanel {
 		WordCloudChart.exportStaticMethod();
 	}
 
-	protected static final native String generateId() /*-{
+	/**
+	 * Creates random ID for this chart.
+	 * @return randomId String
+	 */
+	protected static native String generateId() /*-{
         var CHARS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
         //http://www.broofa.com/Tools/Math.uuid.js
         var chars = CHARS, uuid = new Array(36), rnd = 0, r;
@@ -66,6 +70,11 @@ public abstract class WordCloudChart extends SimplePanel {
             @us.ascendtech.wordcloud2.client.WordCloudChart::clickedWord(Ljava/lang/String;Ljava/lang/String;I);
     }-*/;
 
+	/**
+	 * Abstract method to be implemented by the user of the class to handle clicking on words on the word cloud
+	 * @param tag
+	 * @param frequency
+	 */
 	public abstract void clickedWord(String tag, int frequency);
 
 	public WordCloudChart() {
@@ -81,7 +90,7 @@ public abstract class WordCloudChart extends SimplePanel {
 	}
 
 	/**
-	 * Sets the chart data and options.
+	 * Sets the chart data and options. Has to be set by the caller.
 	 * @param data list of {@code WordCloudChartData}
 	 * @param options wordcloud2.js options
 	 */
