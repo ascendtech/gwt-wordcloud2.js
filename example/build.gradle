@@ -12,7 +12,7 @@ dependencies {
 		transitive false
 	}
 
-	compile project(':wordcloud2js')
+	compile project(':gwt-wordcloud2js')
 
 }
 
