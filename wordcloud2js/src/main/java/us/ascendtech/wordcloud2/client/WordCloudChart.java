@@ -72,8 +72,8 @@ public abstract class WordCloudChart extends SimplePanel {
 
 	/**
 	 * Abstract method to be implemented by the user of the class to handle clicking on words on the word cloud
-	 * @param tag
-	 * @param frequency
+	 * @param tag string word
+	 * @param frequency string frequency of the word
 	 */
 	public abstract void clickedWord(String tag, int frequency);
 
