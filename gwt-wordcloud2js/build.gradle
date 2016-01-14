@@ -1,24 +1,6 @@
+apply from: '../maven.gradle'
+
 apply plugin: 'java'
-
-task sourcesJar(type: Jar, dependsOn: classes) {
-	classifier = 'sources'
-	from sourceSets.main.allSource
-}
-
-task generateJavadoc(type: Javadoc) {
-	source = sourceSets.main.allJava
-	options.addStringOption("sourcepath", "/path/to/gwt/source")
-}
-
-task javadocJar(type: Jar, dependsOn: generateJavadoc) {
-	classifier = 'javadoc'
-	from javadoc.destinationDir
-}
-
-artifacts {
-	archives sourcesJar
-	archives javadocJar
-}
 
 dependencies {
 

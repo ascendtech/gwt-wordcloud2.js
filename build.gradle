@@ -22,6 +22,7 @@ subprojects {
 	targetCompatibility = 1.8
 
 	version = '1.0'
+	ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
 	group = 'us.ascendtech'
 
@@ -47,12 +48,6 @@ subprojects {
 		options.debugOptions.debugLevel = "source,lines,vars"
 	}
 
-	ext.luceneVersion = '5.4.0'
-	ext.solrVersion = '5.4.0'
-	ext.mongoDBJavaVersion = '3.2.0'
-	ext.guavaVersion = '20.0-SNAPSHOT'
-	ext.gsonVersion = '2.2.4'
-
 	dependencies {
 		testCompile 'junit:junit:[4.10,)'
 	}
@@ -70,13 +65,13 @@ subprojects {
 		}
 	}
 
-	task sourceJar(type: Jar) {
+	task sourcesJar(type: Jar) {
 		classifier = 'sources'
 		from sourceSets.main.allSource
 	}
 
 	jar {
-		dependsOn 'sourceJar'
+		dependsOn 'sourcesJar'
 	}
 
 	configurations {
@@ -85,7 +80,7 @@ subprojects {
 
 
 	artifacts {
-		source sourceJar
+		source sourcesJar
 	}
 
 

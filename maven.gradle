@@ -3,7 +3,12 @@ if (hasProperty('sonatypeUsername')) {
 	apply plugin: 'maven-publish'
 	apply plugin: 'signing'
 
-	task javadocJar(type: Jar, dependsOn: javadoc) {
+	task generateJavadoc(type: Javadoc) {
+		source = sourceSets.main.allJava
+		options.addStringOption("sourcepath", "/path/to/gwt/source")
+	}
+
+	task javadocJar(type: Jar, dependsOn: generateJavadoc) {
 		classifier = 'javadoc'
 		from 'build/docs/javadoc'
 	}
@@ -13,7 +18,6 @@ if (hasProperty('sonatypeUsername')) {
 		archives sourcesJar
 		archives javadocJar
 	}
-
 
 	signing {
 		required { gradle.taskGraph.hasTask("uploadArchives"); }
