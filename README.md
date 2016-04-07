@@ -13,6 +13,7 @@ Maven
 Gradle
 ```
 'us.ascendtech:gwt-wordcloud2js:1.0'
+'us.ascendtech:gwt-wordcloud2js:1.0:sources'
 ```
 
 If you happen to clone the source, please make sure to modify maven.gradle and update /path/to/gwt/source to wherever you have your gwt sources extracted.
