@@ -4,7 +4,7 @@ apply plugin: 'java'
 
 dependencies {
 
-	compile('com.google.gwt:gwt-user:2.7.0') {
+    compile('com.google.gwt:gwt-user:2.8.0-rc2') {
 		transitive false
 	}
 
