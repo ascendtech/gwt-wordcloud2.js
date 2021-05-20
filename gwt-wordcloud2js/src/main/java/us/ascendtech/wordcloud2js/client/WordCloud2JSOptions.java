@@ -12,11 +12,9 @@ public class WordCloud2JSOptions {
 	private JsArray<JsArray<Object>> list;
 	private String fontFamily;
 	private String fontWeight;
-	private String color;
-	private Color colorFn;
+	private Object color;
 	private Double minSize;
-	private Double weightFactor;
-	private WeightFactor weightFactorFn;
+	private Object weightFactor;
 	private Boolean clearCanvas;
 	private String backgroundColor;
 	private Double gridSize;
@@ -100,7 +98,7 @@ public class WordCloud2JSOptions {
 
 	@JsOverlay
 	public final WordCloud2JSOptions setColor(Color color) {
-		this.colorFn = color;
+		this.color = color;
 		return this;
 	}
 
@@ -111,7 +109,7 @@ public class WordCloud2JSOptions {
 	}
 
 	@JsOverlay
-	public final String getColor() {
+	public final Object getColor() {
 		return color;
 	}
 
@@ -128,7 +126,7 @@ public class WordCloud2JSOptions {
 
 	@JsOverlay
 	public final WordCloud2JSOptions setWeightFactor(WeightFactor weightFactor) {
-		this.weightFactorFn = weightFactor;
+		this.weightFactor = weightFactor;
 		return this;
 	}
 
@@ -139,7 +137,7 @@ public class WordCloud2JSOptions {
 	}
 
 	@JsOverlay
-	public final Double getWeightFactor() {
+	public final Object getWeightFactor() {
 		return weightFactor;
 	}
 
