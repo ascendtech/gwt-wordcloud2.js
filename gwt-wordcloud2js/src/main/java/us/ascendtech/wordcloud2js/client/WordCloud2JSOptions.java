@@ -13,8 +13,10 @@ public class WordCloud2JSOptions {
 	private String fontFamily;
 	private String fontWeight;
 	private String color;
+	private Color colorFn;
 	private Double minSize;
 	private Double weightFactor;
+	private WeightFactor weightFactorFn;
 	private Boolean clearCanvas;
 	private String backgroundColor;
 	private Double gridSize;
@@ -53,6 +55,16 @@ public class WordCloud2JSOptions {
 		void onClick(Object item);
 	}
 
+	@JsFunction
+	public interface WeightFactor {
+		Double getWeightFactor(Double size);
+	}
+
+	@JsFunction
+	public interface Color {
+		String getColor(Object item, Double weight);
+	}
+
 	@JsOverlay
 	public final JsArray<JsArray<Object>> getList() {
 		return list;
@@ -87,14 +99,20 @@ public class WordCloud2JSOptions {
 	}
 
 	@JsOverlay
-	public final String getColor() {
-		return color;
+	public final WordCloud2JSOptions setColor(Color color) {
+		this.colorFn = color;
+		return this;
 	}
 
 	@JsOverlay
 	public final WordCloud2JSOptions setColor(String color) {
 		this.color = color;
 		return this;
+	}
+
+	@JsOverlay
+	public final String getColor() {
+		return color;
 	}
 
 	@JsOverlay
@@ -109,14 +127,20 @@ public class WordCloud2JSOptions {
 	}
 
 	@JsOverlay
-	public final Double getWeightFactor() {
-		return weightFactor;
+	public final WordCloud2JSOptions setWeightFactor(WeightFactor weightFactor) {
+		this.weightFactorFn = weightFactor;
+		return this;
 	}
 
 	@JsOverlay
 	public final WordCloud2JSOptions setWeightFactor(Double weightFactor) {
 		this.weightFactor = weightFactor;
 		return this;
+	}
+
+	@JsOverlay
+	public final Double getWeightFactor() {
+		return weightFactor;
 	}
 
 	@JsOverlay
@@ -337,4 +361,5 @@ public class WordCloud2JSOptions {
 	public final void setHover(Hover hover) {
 		this.hover = hover;
 	}
+
 }
