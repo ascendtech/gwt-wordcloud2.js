@@ -57,7 +57,7 @@ Add dependency to gwt.xml:
 
 ```java
 // generate data object
-JsArray<JsArray<Object>>data=new JsArray<>();
+JsArray<JsArray<Object>> data = new JsArray<>();
 for (Term term:Elements.elements(terms)) {
 	data.push(new JsArray<>(term.getTerm(),term.getWeight()));
 }
