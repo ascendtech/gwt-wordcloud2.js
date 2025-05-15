@@ -1,14 +1,22 @@
-import org.ajoberstar.reckon.gradle.ReckonExtension
-
 plugins {
     java
     idea
-    id("org.ajoberstar.reckon") version "0.13.0"
+    id("us.ascendtech.gwt.lib") version "0.11.1" apply false
+    signing
+    `maven-publish`
+    alias(libs.plugins.reckon)
 }
 
-configure<ReckonExtension> {
-    scopeFromProp()
-    stageFromProp("rc", "final")
+reckon {
+    setDefaultInferredScope("patch")
+    setScopeCalc(calcScopeFromProp())
+    snapshots()
+    stages("beta", "final")
+    setStageCalc(calcStageFromProp())
+}
+
+allprojects {
+    group = "us.ascendtech"
 }
 
 
@@ -17,17 +25,17 @@ defaultTasks("build")
 subprojects {
 
     apply(plugin = "java")
-    apply(plugin = "maven")
     apply(plugin = "idea")
-
+    apply(plugin = "signing")
+    apply(plugin = "maven-publish")
 
     defaultTasks("build")
     group = "us.ascendtech"
 
-    repositories {
-        mavenCentral()
+    configurations.all {
+        // check for updates every build more than 10 minutes apart (for snapshots)
+        resolutionStrategy.cacheChangingModulesFor(10, TimeUnit.MINUTES)
     }
-
 
     tasks.withType<JavaCompile> {
         options.isDebug = true
@@ -36,17 +44,26 @@ subprojects {
         options.compilerArgs.add("-parameters")
     }
 
-    dependencies {
-        implementation("com.google.jsinterop:jsinterop-annotations:2.0.0")
-        testImplementation("org.junit.jupiter:junit-jupiter-api:5.2.0")
-        testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.2.0")
+    sourceSets {
+        main {
+            java {
+                srcDir("src/main/java")
+            }
+            resources {
+                srcDir("src/main/java")
+            }
+        }
+    }
+
+    idea.module {
+        resourceDirs = resourceDirs - file("src/main/java")
     }
 
     val sourcesJar = tasks.register<Jar>("sourcesJar") {
-        classifier = "sources"
-        from(sourceSets.getByName("main").allSource)
+        dependsOn(JavaPlugin.CLASSES_TASK_NAME)
+        archiveClassifier.set("sources")
+        from(sourceSets.main.get().allJava)
     }
-
 
     artifacts.add("archives", sourcesJar)
 
@@ -58,4 +75,52 @@ subprojects {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
+    publishing {
+        publications {
+            create<MavenPublication>("mavenJava") {
+                from(components["java"])
+                artifact(tasks["sourcesJar"])
+                pom {
+                    url.set("https://github.com/ascendtech/gwt-wordcloud2.js")
+                    licenses {
+                        license {
+                            name.set("The Apache License, Version 2.0")
+                            url.set("https://www.apache.org/licenses/LICENSE-2.0.txt")
+                        }
+                    }
+                    developers {
+                        developer {
+                            id.set("mdavis")
+                            name.set("Matt Davis")
+                            email.set("matt.davis@ascend-tech.us")
+                            organization.set("Ascendant Software Technology, LLC")
+                            organizationUrl.set("https://www.ascend-tech.us")
+                        }
+                        developer {
+                            id.set("payam.meyer")
+                            name.set("Payam Mayer")
+                            email.set("payam.meyer@ascend-tech.us")
+                            organization.set("Ascendant Software Technology, LLC")
+                            organizationUrl.set("https://www.ascend-tech.us")
+                        }
+                    }
+                    scm {
+                        connection.set("git@github.com:ascendtech/gwt-wordcloud2.js.git")
+                        developerConnection.set("git@github.com:ascendtech/gwt-wordcloud2.js.git")
+                        url.set("https://github.com/ascendtech/gwt-wordcloud2.js.git")
+                    }
+                    name.set(project.name)
+                    description.set(project.name)
+                }
+            }
+        }
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+
+
 }
