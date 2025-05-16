@@ -20,8 +20,8 @@ Add AST Maven Repo
 Add Dependency:
 
 ```gradle
-  compile 'us.ascendtech:gwt-wordcloud2js:2.0.0'
-  compile 'us.ascendtech:gwt-wordcloud2js:2.0.0:sources'
+  compile 'us.ascendtech:gwt-wordcloud2js:2.1.0'
+  compile 'us.ascendtech:gwt-wordcloud2js:2.1.0:sources'
 ```
 
 ### Gradle Kotlin
